@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Getter
 public class PersonData {
     private LocalDate dateOfBirth;
+    private LocalDate dateOfDeath;
 
 }
 
