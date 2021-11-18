@@ -1,12 +1,15 @@
 package com.fayssalluukdreamteam.personregistry.query.person.endpoints;
 
+import com.fayssalluukdreamteam.personregistry.query.person.Marriage;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
+
+import static javax.persistence.FetchType.EAGER;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,11 +26,16 @@ public class PersonData {
     @Column(nullable = true)
     LocalDate dateOfDeath;
 
-    @Column(nullable = true)
-    LocalDate dateOfMarriage;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id.personId", fetch = EAGER, orphanRemoval=true)
+    @MapKey(name = "id.marriageDate")
+    Map<LocalDate, Marriage> marriages;
 
-    @Column(nullable = true)
-    LocalDate dateOfDivorce;
+//
+//    @Column(nullable = true)
+//    LocalDate dateOfMarriage;
+//
+//    @Column(nullable = true)
+//    LocalDate dateOfDivorce;
 
     public PersonData(UUID uuid, LocalDate dateOfBirth) {
         this.uuid = uuid;

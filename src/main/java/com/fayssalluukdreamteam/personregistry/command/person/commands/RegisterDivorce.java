@@ -15,4 +15,5 @@ public class RegisterDivorce {
     @TargetAggregateIdentifier
     UUID uuid;
     LocalDate dateOfDivorce;
+    LocalDate dateOfMarriage;
 }

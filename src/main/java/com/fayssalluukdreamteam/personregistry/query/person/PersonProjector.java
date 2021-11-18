@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -42,22 +44,26 @@ public class PersonProjector {
         log.info("Person with information {} deleted", personDeleted);
     }
 
+    //TODO check if it works
     @EventHandler
     public void handleEventMarriageRegister(MarriageRegistered marriageRegistered) {
+        Marriage marriage = new Marriage(new MarriageId(marriageRegistered.getUuid(), marriageRegistered.getDateOfMarriage()));
         PersonData person = findById(marriageRegistered.getUuid());
 
-        person.setDateOfMarriage(marriageRegistered.getDateOfMarriage());
+        person.getMarriages().put(marriageRegistered.getDateOfMarriage(), marriage);
 
         personRegistry.save(person);
 
         log.info("Person with information {} marriage registered", marriageRegistered);
     }
 
+    //TODO check if it works
     @EventHandler
     public void handleEventRegisterDivorce(DivorceRegistered divorceRegistered) {
         PersonData person = findById(divorceRegistered.getUuid());
 
-        person.setDateOfDivorce(divorceRegistered.getDateOfDivorce());
+        Marriage marriage = person.getMarriages().get(divorceRegistered.getDateOfMarriage());
+        marriage.setDivorceDate(divorceRegistered.getDateOfDivorce());
 
         personRegistry.save(person);
 

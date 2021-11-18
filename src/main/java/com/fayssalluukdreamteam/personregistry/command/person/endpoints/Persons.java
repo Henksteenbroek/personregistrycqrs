@@ -37,9 +37,9 @@ public class Persons {
         commander.registerDateOfMarriage(uuid, date);
     }
 
-    @PutMapping("/{uuid}/marriages/{date}/divorce")
-    public void registerDateOfDivorce(@RequestBody LocalDate date, @PathVariable UUID uuid){
-        commander.registerDateOfDivorce(uuid, date);
+    @PutMapping("/{uuid}/marriages/{dateOfMarriage}/divorce")
+    public void registerDateOfDivorce(@RequestBody LocalDate dateOfDivorce, @PathVariable UUID uuid, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @PathVariable LocalDate dateOfMarriage){
+        commander.registerDateOfDivorce(uuid, dateOfDivorce, dateOfMarriage);
     }
 
 

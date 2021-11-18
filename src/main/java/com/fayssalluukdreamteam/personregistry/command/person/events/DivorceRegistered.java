@@ -11,4 +11,5 @@ import java.util.UUID;
 public class DivorceRegistered {
     UUID uuid;
     LocalDate dateOfDivorce;
+    LocalDate dateOfMarriage;
 }

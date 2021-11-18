@@ -52,8 +52,8 @@ public class PersonCommander {
         log.info("Dispatching command Register Date of Death");
     }
 
-    public void registerDateOfDivorce(UUID uuid, LocalDate dateOfDivorce) {
-        RegisterDivorce registerDivorce = new RegisterDivorce(uuid, dateOfDivorce);
+    public void registerDateOfDivorce(UUID uuid, LocalDate dateOfDivorce, LocalDate dateOfMarriage) {
+        RegisterDivorce registerDivorce = new RegisterDivorce(uuid, dateOfDivorce, dateOfMarriage);
 
         gateway.sendAndWait(registerDivorce);
 
